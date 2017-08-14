@@ -7,7 +7,7 @@ use Google\Managers\GoogleManager;
 use GuzzleHttp\Client;
 use Illuminate\Support\ServiceProvider;
 
-class GooglePlacesServiceProvider extends ServiceProvider {
+class GoogleServiceProvider extends ServiceProvider {
 	protected $defer = true;
 
 	/**
