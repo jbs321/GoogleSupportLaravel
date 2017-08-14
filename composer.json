@@ -1,0 +1,20 @@
+{
+    "name": "jacob/google-support-laravel",
+    "description": "Google Support For Laravel 5.*",
+    "type": "library",
+    "license": "GNU",
+    "version":"1.0.0-dev",
+    "authors": [
+        {
+            "name": "Jacob Balabanov Lanir",
+            "email": "jacob@balabanov.ca"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Google\\": "src"
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {}
+}
