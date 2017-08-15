@@ -5,7 +5,7 @@ namespace Google\Facades;
 use Google\Managers\GoogleManager;
 use Illuminate\Support\Facades\Facade;
 
-class GoogleFacade extends Facade
+class Google extends Facade
 {
     /**
      * Get the registered name of the component.
