@@ -8,7 +8,7 @@ use GuzzleHttp\Client;
 use Illuminate\Support\ServiceProvider;
 
 class GoogleServiceProvider extends ServiceProvider {
-	protected $defer = true;
+	protected $defer = false;
 
 	/**
 	 * Bootstrap the application services.
