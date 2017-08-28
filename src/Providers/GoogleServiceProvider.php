@@ -2,22 +2,22 @@
 
 namespace Google\Providers;
 
-use Exception;
+use Google\Managers\Google;
 use Google\Managers\GoogleManager;
-use GuzzleHttp\Client;
 use Illuminate\Support\ServiceProvider;
 
 class GoogleServiceProvider extends ServiceProvider {
 	protected $defer = false;
 
 	/**
-	 * Bootstrap the application services.
+	 * Bootstrap the Google Configuration settings.
 	 *
 	 * @return void
 	 */
-	public function boot()
-	{
-		//
+	public function boot() {
+		$this->publishes( [
+			__DIR__ . '\..\config.php' => config_path( 'google.php' ),
+		] );
 	}
 
 	/**
@@ -25,18 +25,16 @@ class GoogleServiceProvider extends ServiceProvider {
 	 *
 	 * @return void
 	 */
-	public function register()
-	{
-		$this->app->singleton(GoogleManager::class, function ($app) {
-			if (!config("app.app_google_places_api_key")) {
-				throw new Exception("Google Places App key is missing");
-			}
+	public function register() {
+		$this->registerGoogleManager();
+	}
 
-			$appKey = config("app.app_google_places_api_key");
-			$service = new GoogleManager($appKey);
-			$service->setClient(new Client());
-
-			return $service;
-		});
+	/**
+	 * Register Google Manager
+	 */
+	public function registerGoogleManager(  ) {
+		$this->app->singleton( Google::class, function ( $app ) {
+			return new Google();
+		} );
 	}
 }

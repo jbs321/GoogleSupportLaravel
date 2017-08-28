@@ -2,8 +2,8 @@
 
 namespace Google\Facades;
 
-use Google\Managers\GoogleManager;
 use Illuminate\Support\Facades\Facade;
+use Google\Managers\Google as GoogleManager;
 
 class Google extends Facade
 {
