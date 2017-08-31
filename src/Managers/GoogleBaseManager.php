@@ -33,15 +33,17 @@ class GoogleBaseManager implements GoogleApiInterface {
 	}
 
 	public function createQuery( array $parameters = [] ) {
-		$this->validateQuery($parameters);
+		$apiPath = $this->getApiPath();
 
-		$paramsChunks = [];
-
-		foreach ($parameters as $key => $value) {
-			$paramsChunks[] = "{$key}={$value}";
+		if(!$parameters) {
+			return $apiPath;
 		}
 
-		return $this->getApiPath() . "?" . join("&", $paramsChunks);
+		$this->validateQuery($parameters);
+
+		$queryParams = http_build_query($parameters);
+
+		return join("?", [$apiPath, $queryParams]);
 	}
 
 	/**

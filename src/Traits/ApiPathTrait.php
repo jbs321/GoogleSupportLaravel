@@ -12,6 +12,10 @@ trait ApiPathTrait {
 	 * @return mixed
 	 */
 	public function getApiPath() {
+		if(!$this->apiPath){
+			$this->apiPath = url('api');
+		}
+
 		return $this->apiPath;
 	}
 

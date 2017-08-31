@@ -7,23 +7,23 @@ use Psr\Http\Message\StreamInterface;
 
 class GooglePlacesResponse
 {
-    const KEY__STATUS = "status";
-    const KEY__RESULTS = "results";
+    const KEY__STATUS            = "status";
+    const KEY__RESULTS           = "results";
     const KEY__HTML_ATTRIBUTIONS = "html_attributions";
 
-    const KEY__RESPONSE_TYPE_XML = "xml";
+    const KEY__RESPONSE_TYPE_XML  = "xml";
     const KEY__RESPONSE_TYPE_JSON = "json";
 
     /**  indicates that no errors occurred; the place was successfully detected and at least one result was returned. */
-    const STATUS_TYPE__OK = "OK";
+    const STATUS_TYPE__OK                = "OK";
     /**  indicates that the search was successful but returned no results. This may occur if the search was passed a latlng in a remote location. */
-    const STATUS_TYPE__ZERO_RESULTS = "ZERO_RESULTS";
+    const STATUS_TYPE__ZERO_RESULTS      = "ZERO_RESULTS";
     /**  indicates that you are over your quota. */
     const STATUS_TYPE__OVER_QUERY_LIMIT  = "OVER_QUERY_LIMIT";
     /**  indicates that your request was denied, generally because of lack of an invalid key parameter. */
-    const STATUS_TYPE__REQUEST_DENIED = "REQUEST_DENIED";
+    const STATUS_TYPE__REQUEST_DENIED    = "REQUEST_DENIED";
     /**  generally indicates that a required query parameter (location or radius) is missing. */
-    const STATUS_TYPE__INVALID_REQUEST = "INVALID_REQUEST";
+    const STATUS_TYPE__INVALID_REQUEST   = "INVALID_REQUEST";
 
     /** @var  string -  contains metadata on the request. See Status Codes below. */
     private $status;

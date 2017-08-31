@@ -10,38 +10,47 @@ use GuzzleHttp\Client;
  */
 class Google {
 
+	const CONFIG_KEY_KEYS   = 'keys';
+	const CONFIG_KEY_GOOGLE = 'google';
+
 	const KEY_MAPPING = [
-		GoogleMapsManager::class => 'google_maps',
+		GoogleMapsManager::class       => 'google_maps',
 		GoogleStaticMapsManager::class => 'google_static_maps',
 		GoogleStreetViewManager::class => 'street_view',
-		GooglePlacesManager::class => 'google_places',
+		GooglePlacesManager::class     => 'google_places',
 	];
 
-	public function maps() {
+	public function maps() : GoogleMapsManager {
 		return $this->getClassManager(GoogleMapsManager::class);
 	}
 
-	public function staticMaps() {
+	public function staticMaps() : GoogleStaticMapsManager {
 		return $this->getClassManager(GoogleStaticMapsManager::class);
 	}
 
-	public function streetView() {
+	public function streetView() : GoogleStreetViewManager {
 		return $this->getClassManager(GoogleStreetViewManager::class);
 	}
 
-	public function places() {
+	public function places() : GooglePlacesManager {
 		return $this->getClassManager(GooglePlacesManager::class);
 	}
 
-	public function getClassManager( $className ) {
+	/**
+	 * Get class ref and return new instance of class
+	 * @param string $className
+	 *
+	 * @return GoogleBaseManager
+	 */
+	public function getClassManager( string $className ) : GoogleBaseManager {
 		/** @var GoogleBaseManager $manager */
 		$manager = new $className();
-		$apiKey  = $this->findKeyMapping($className);
+		$apiKey  = $this->findConfigKey($className);
 		$manager->setApiKey($apiKey)->setClient(new Client());
 		return $manager;
 	}
 	
-	public function findKeyMapping(string $className) {
+	public function findConfigKey(string $className) {
 		$confKey = self::KEY_MAPPING[$className];
 
 		if(!$confKey) {
@@ -49,12 +58,13 @@ class Google {
 		}
 
 		//Taken from laravel global helper function config()
-		$apiKey  = config(join('.', ["google" , "keys", $confKey]) );
+		$apiKey         = join('.', [self::CONFIG_KEY_GOOGLE , self::CONFIG_KEY_KEYS, $confKey]);
+		$keyConfigValue = config($apiKey);
 
-		if(!$apiKey) {
+		if(!$keyConfigValue) {
 			throw new \Exception('Missing API key for class: ' . self::class );
 		}
 
-		return $apiKey;
+		return $keyConfigValue;
 	}
 }
