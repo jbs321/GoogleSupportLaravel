@@ -29,6 +29,7 @@ class GooglePlacesManager extends GoogleBaseManager
 		}
 
 		$data = new GooglePlacesResponse($googleResponse);
+
 		return $data;
 	}
 

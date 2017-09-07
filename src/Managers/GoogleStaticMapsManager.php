@@ -75,6 +75,7 @@ class GoogleStaticMapsManager extends GoogleBaseManager
 	/**
 	 * Free Usage: 640 x 640 maximum image resolution.
 	 * Premium Usage: 2048 x 2048 maximum image resolution.
+	 * Zoom: 20 - Building Resolution
 	 **/
 	public function findImageByAddress( $address = "", $width = 640, $height = 640, $zoom = 15) {
 		$address  = urlencode( $address );

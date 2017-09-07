@@ -3,8 +3,9 @@
 namespace Google\Types;
 
 use Exception;
+use Illuminate\Contracts\Support\Arrayable;
 
-class GoogleResult {
+class GooglePlacesResult implements Arrayable {
 
 	const KEY_TYPE_AIRPORT = "airport",
 		  KEY_TYPE_AMUSEMENT_PARK = "amusement_park",
@@ -355,5 +356,15 @@ class GoogleResult {
 	 */
 	public function setFormatted_address( $formatted_address ) {
 		$this->formatted_address = $formatted_address;
+	}
+
+	public function toArray() {
+		$result = [];
+
+		foreach (self::GOOGLE_SEARCH_RESULT_KEYS as $key) {
+			$result[$key] = $this->$key;
+		}
+
+		return $result;
 	}
 }
