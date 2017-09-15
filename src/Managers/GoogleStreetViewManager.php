@@ -31,7 +31,7 @@ class GoogleStreetViewManager extends GoogleBaseManager {
 	 * Free Usage: 640 x 640 maximum image resolution.
 	 * Premium Usage: 2048 x 2048 maximum image resolution.
 	 **/
-	public function findImageByAddress( $address = "", $width = 640, $height = 640) {
+	public function findImageByAddress( $address = "", $width = 640, $height = 250) {
 		$address  = urlencode( $address );
 
 		$path  = "{$this->apiPath}?size={$width}x{$height}&location={$address}&key={$this->apiKey}";

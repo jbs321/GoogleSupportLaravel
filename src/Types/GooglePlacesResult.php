@@ -225,6 +225,8 @@ class GooglePlacesResult implements Arrayable {
 	private $types;
 	private $place_id;
 	private $geometry;
+	private $lng;
+	private $lat;
 	private $reference;
 	private $formatted_address;
 
@@ -357,6 +359,48 @@ class GooglePlacesResult implements Arrayable {
 	public function setFormatted_address( $formatted_address ) {
 		$this->formatted_address = $formatted_address;
 	}
+
+    /**
+     * @return mixed
+     */
+    public function getLng()
+    {
+        if(isset($this->lng)) {
+            return $this->lng;
+        } else {
+            return $this->geometry['location']['lng'];
+        }
+    }
+
+    /**
+     * @param mixed $lng
+     */
+    public function setLng($lng)
+    {
+        $this->lng = $lng;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLat()
+    {
+        if(isset($this->lat)) {
+            return $this->lat;
+        } else {
+            return $this->geometry['location']['lat'];
+        }
+    }
+
+    /**
+     * @param mixed $lat
+     */
+    public function setLat($lat)
+    {
+        $this->lat = $lat;
+    }
+
+
 
 	public function toArray() {
 		$result = [];
