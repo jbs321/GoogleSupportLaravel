@@ -3,7 +3,6 @@
 namespace Google\Managers;
 
 use Exception;
-use Google\Types\GooglePlacesResponse;
 
 /**
  * Class GooglePlacesManager

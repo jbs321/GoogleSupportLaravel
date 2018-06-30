@@ -5,6 +5,7 @@ namespace Google\Facades;
 use Google\Managers\GoogleMapsManager;
 use Google\Managers\GooglePlacesManager;
 use Google\Managers\GoogleStaticMapsManager;
+use Google\Managers\GooglePlacesAutoCompleteManager;
 use Google\Managers\GoogleStreetViewManager;
 use Illuminate\Support\Facades\Facade;
 use Google\Managers\Google as GoogleManager;
@@ -14,6 +15,7 @@ use Google\Managers\Google as GoogleManager;
  * @method static GoogleStaticMapsManager staticMaps()
  * @method static GoogleStreetViewManager streetView()
  * @method static GooglePlacesManager places()
+ * @method static GooglePlacesAutoCompleteManager autoComplete()
  *
  * @see GoogleMapsManager
  * @see GoogleStaticMapsManager
