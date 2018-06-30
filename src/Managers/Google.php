@@ -19,7 +19,7 @@ class Google
         GoogleStaticMapsManager::class => 'google_static_maps',
         GoogleStreetViewManager::class => 'street_view',
         GooglePlacesManager::class => 'google_places',
-        GooglePlacesAutoCompleteManager::class => 'google_places_autocomplete',
+        GooglePlacesAutoCompleteManager::class => 'google_places',
     ];
 
     public function maps(): GoogleMapsManager
