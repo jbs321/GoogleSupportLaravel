@@ -2,7 +2,7 @@
     "name": "jbs321/google-support-laravel",
     "description": "Google Support For Laravel 5.*",
     "type": "library",
-    "license": "GNU",
+    "license": "MIT",
     "version":"1.0.0-dev",
     "authors": [
         {
