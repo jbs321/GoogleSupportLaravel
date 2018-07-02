@@ -4,6 +4,7 @@ namespace Google\Managers;
 
 use Exception;
 use Google\Types\GooglePlacesResponse;
+use Google\Types\PlaceAutoComplete;
 
 /**
  * Class GooglePlacesManager
@@ -20,11 +21,12 @@ class GooglePlacesAutoCompleteManager extends GoogleBaseManager
 
     /**
      * @param string $query
-     *
-     * @return GooglePlacesResponse
+     * @return PlaceAutoComplete
+     * @throws Exception
      */
     public function findAddressByQuery(string $query)
     {
+
         $fullQuery = $this->makeApiQuery($query);
 
         try {
@@ -33,18 +35,19 @@ class GooglePlacesAutoCompleteManager extends GoogleBaseManager
             abort(500, "Technical Issue please contact System Admin");
         }
 
-        $data = new GooglePlacesResponse($googleResponse);
+        /** @var PlaceAutoComplete $data */
+        $data = new PlaceAutoComplete($googleResponse);
 
-        return $data;
+        return $data->getResults();
     }
 
     /**
      * @param string $query
      * @param string $returnType
-     *
      * @return string
+     * @throws Exception
      */
-    public function makeApiQuery($query = "", $returnType = GooglePlacesResponse::KEY__RESPONSE_TYPE_JSON)
+    protected function makeApiQuery($query = "", $returnType = GooglePlacesResponse::KEY__RESPONSE_TYPE_JSON)
     {
         $components = ['ca'];
         $query = join("/", [$this->apiPath, $returnType]) . "?key={$this->apiKey}&input={$query}";
@@ -58,7 +61,7 @@ class GooglePlacesAutoCompleteManager extends GoogleBaseManager
                 return "country:{$countryCode}";
             }, $components);
             $restrictions = implode("|", $components);
-            return  "$query&$restrictions";
+            return  "$query&components=$restrictions";
         }
     }
 }

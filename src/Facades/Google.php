@@ -15,7 +15,7 @@ use Google\Managers\Google as GoogleManager;
  * @method static GoogleStaticMapsManager staticMaps()
  * @method static GoogleStreetViewManager streetView()
  * @method static GooglePlacesManager places()
- * @method static GooglePlacesAutoCompleteManager autoComplete()
+ * @method static GooglePlacesAutoCompleteManager placesAutoComplete()
  *
  * @see GoogleMapsManager
  * @see GoogleStaticMapsManager

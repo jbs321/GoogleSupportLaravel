@@ -14,12 +14,17 @@ class Google
     const CONFIG_KEY_KEYS = 'keys';
     const CONFIG_KEY_GOOGLE = 'google';
 
+    const SERVICE__GOOGLE_MAPS = "google_maps";
+    const SERVICE__GOOGLE_STATIC_MAPS = "google_static_maps";
+    const SERVICE__GOOGLE_STREET_VIEW = "street_view";
+    const SERVICE__GOOGLE_PLACES = "google_places";
+
     const KEY_MAPPING = [
-        GoogleMapsManager::class => 'google_maps',
-        GoogleStaticMapsManager::class => 'google_static_maps',
-        GoogleStreetViewManager::class => 'street_view',
-        GooglePlacesManager::class => 'google_places',
-        GooglePlacesAutoCompleteManager::class => 'google_places',
+        GoogleMapsManager::class => self::SERVICE__GOOGLE_MAPS,
+        GoogleStaticMapsManager::class => self::SERVICE__GOOGLE_STATIC_MAPS,
+        GoogleStreetViewManager::class => self::SERVICE__GOOGLE_STREET_VIEW,
+        GooglePlacesManager::class => self::SERVICE__GOOGLE_PLACES,
+        GooglePlacesAutoCompleteManager::class => self::SERVICE__GOOGLE_PLACES,
     ];
 
     public function maps(): GoogleMapsManager
@@ -42,7 +47,7 @@ class Google
         return $this->getClassManager(GooglePlacesManager::class);
     }
 
-    public function autoComplete(): GooglePlacesAutoCompleteManager
+    public function placesAutoComplete(): GooglePlacesAutoCompleteManager
     {
         return $this->getClassManager(GooglePlacesAutoCompleteManager::class);
     }
@@ -55,8 +60,13 @@ class Google
      */
     public function getClassManager(string $className): GoogleBaseManager
     {
+        if (!class_exists($className)) {
+            throw new \Exception("Class $className dosn't exist");
+        }
+
         /** @var GoogleBaseManager $manager */
         $manager = new $className();
+
         $apiKey = $this->findConfigKey($className);
         $manager->setApiKey($apiKey)->setClient(new Client());
         return $manager;
